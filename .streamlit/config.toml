@@ -1,0 +1,51 @@
+[server]
+enableStaticServing = true
+
+[[theme.fontFaces]]
+family = "TWKEverett"
+url = "app/static/TWKEverett-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "TWKEverett"
+url = "app/static/TWKEverett-Bold.ttf"
+style = "normal"
+weight = 700
+
+[[theme.fontFaces]]
+family = "FoundersGrotesk"
+url = "app/static/FoundersGrotesk-Regular.ttf"
+style = "normal"
+weight = 400
+
+[[theme.fontFaces]]
+family = "FoundersGrotesk"
+url = "app/static/FoundersGrotesk-Medium.ttf"
+style = "normal"
+weight = 500
+
+[[theme.fontFaces]]
+family = "FoundersGrotesk"
+url = "app/static/FoundersGrotesk-Light.ttf"
+style = "normal"
+weight = 300
+
+[theme]
+primaryColor = "#CB5534"
+backgroundColor = "#F9F7F3"
+secondaryBackgroundColor = "#F9F7F3"
+textColor = "#1C1C1E"
+linkColor = "#4581B7"
+borderColor = "#E6E4E1"
+showWidgetBorder = true
+baseRadius = "0.6rem"
+font = "FoundersGrotesk"
+headingFont = "TWKEverett"
+codeFont = "FoundersGrotesk"
+codeBackgroundColor = "#F5D4CC"
+showSidebarBorder = true
+
+[theme.sidebar]
+backgroundColor = "#F9F7F3"
+secondaryBackgroundColor = "#E6E4E1"

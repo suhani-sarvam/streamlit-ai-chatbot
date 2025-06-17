@@ -9,13 +9,28 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Note: Custom styling is now handled via .streamlit/config.toml
+
 # Configure Streamlit page
 st.set_page_config(
     page_title="Sarvam AI Chatbot",
-    page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Custom CSS to override default chat message styling
+st.markdown("""
+<style>
+.st-emotion-cache-1bp69zu {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    background-color: transparent !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Initialize Sarvam AI client
 @st.cache_resource
@@ -68,7 +83,7 @@ def get_ai_response(messages: List[Dict[str, str]], **kwargs) -> str:
 
 def main():
     # App title and description
-    st.title("🤖 Sarvam AI Chatbot")
+    st.header("What can I help with?")
     
     # Sidebar for configuration
     with st.sidebar:
@@ -107,8 +122,13 @@ def main():
     chat_container = st.container()
     with chat_container:
         for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+            # Use custom avatar for assistant messages
+            if message["role"] == "assistant":
+                with st.chat_message("assistant", avatar="image (7) (1).png"):
+                    st.markdown(message["content"])
+            else:
+                with st.chat_message(message["role"],avatar="736198_480.png"):
+                    st.markdown(message["content"])
     
     # Chat input
     if prompt := st.chat_input("Type your message here..."):
@@ -116,7 +136,7 @@ def main():
         st.session_state.messages.append({"role": "user", "content": prompt})
         
         # Display user message
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="736198_480.png"):
             st.markdown(prompt)
         
         # Prepare messages for API (include system message)
@@ -168,8 +188,8 @@ def main():
             "wiki_grounding": wiki_grounding
         }
         
-        # Get AI response
-        with st.chat_message("assistant"):
+        # Get AI response with custom avatar
+        with st.chat_message("assistant", avatar="image (7) (1).png"):
             with st.spinner("🧠 Thinking..."):
                 full_response = get_ai_response(api_messages, **api_params)
                 thinking_content, clean_response = extract_thinking_and_response(full_response)
