@@ -99,8 +99,9 @@ def main():
             st.session_state.messages = []
             st.rerun()
         
-    # Initialize chat history - always start fresh on page refresh
-    st.session_state.messages = []
+    # Initialize chat history if it doesn't exist
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
     
     # Display chat messages
     chat_container = st.container()
